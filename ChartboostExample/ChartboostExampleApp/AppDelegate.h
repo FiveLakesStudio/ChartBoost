@@ -1,14 +1,14 @@
-//
-//  AppDelegate.h
-//  ChartboostExampleApp
-//
-//  Created by Gonzalo Alsina on 11/6/13.
-//  Copyright (c) 2013 Chartboost. All rights reserved.
-//
+/*
+ * AppDelegate.h
+ * ChartboostExampleApp
+ *
+ * Copyright (c) 2013 Chartboost. All rights reserved.
+ */
 
+#import <Chartboost/Chartboost.h>
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, ChartboostDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

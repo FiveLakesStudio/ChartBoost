@@ -1,35 +1,135 @@
-//
-//  AppDelegate.m
-//  ChartboostExampleApp
-//
-//  Created by Gonzalo Alsina on 11/6/13.
-//  Copyright (c) 2013 Chartboost. All rights reserved.
-//
+/*
+ * AppDelegate.m
+ * ChartboostExampleApp
+ *
+ * Copyright (c) 2013 Chartboost. All rights reserved.
+ */
 
-#import "Chartboost.h"
+#import <Chartboost/Chartboost.h>
+#import <Chartboost/CBNewsfeed.h>
 #import "AppDelegate.h"
+#import <CommonCrypto/CommonDigest.h>
+#import <AdSupport/AdSupport.h>
 
-@interface AppDelegate () <ChartboostDelegate>
+@interface AppDelegate () <ChartboostDelegate, CBNewsfeedDelegate>
 @end
 
 @implementation AppDelegate 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self initializeStoryBoardBasedOnScreenSize];
+    
+    
+    // Begin a user session. Must not be dependent on user actions or any prior network requests.
+    [Chartboost startWithAppId:@"4f21c409cd1cb2fb7000001b" appSignature:@"92e2de2fd7070327bdeb54c15a5295309c6fcd2d" delegate:self];
+    
+    [Chartboost cacheRewardedVideo:CBLocationMainMenu];
+    [Chartboost cacheMoreApps:CBLocationHomeScreen];
+    
+    // Begin Newsfeed initialization.
+    [CBNewsfeed startWithDelegate:self];
+    
     return YES;
 }
 
+-(void)initializeStoryBoardBasedOnScreenSize {
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)
+    {    // The iOS device = iPhone or iPod Touch
+        
+        
+        CGSize iOSDeviceScreenSize = [[UIScreen mainScreen] bounds].size;
+        
+        if (iOSDeviceScreenSize.height == 480)
+        {   // iPhone 3GS, 4, and 4S and iPod Touch 3rd and 4th generation: 3.5 inch screen (diagonally measured)
+            
+            NSLog(@"using iphone 4 screen height");
+            
+            // Instantiate a new storyboard object using the storyboard file named Storyboard_iPhone35
+            UIStoryboard *iPhone35Storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone_4" bundle:nil];
+            
+            // Instantiate the initial view controller object from the storyboard
+            UIViewController *initialViewController = [iPhone35Storyboard instantiateInitialViewController];
+            
+            // Instantiate a UIWindow object and initialize it with the screen size of the iOS device
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            
+            // Set the initial view controller to be the root view controller of the window object
+            self.window.rootViewController  = initialViewController;
+            
+            // Set the window object to be the key window and show it
+            [self.window makeKeyAndVisible];
+        }
+        
+        if (iOSDeviceScreenSize.height == 568)
+        {   // iPhone 5 and iPod Touch 5th generation: 4 inch screen (diagonally measured)
+            
+            NSLog(@"using iphone 5 screen height");
+            
+            // Instantiate a new storyboard object using the storyboard file named Storyboard_iPhone4
+            UIStoryboard *iPhone4Storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+            
+            // Instantiate the initial view controller object from the storyboard
+            UIViewController *initialViewController = [iPhone4Storyboard instantiateInitialViewController];
+            
+            // Instantiate a UIWindow object and initialize it with the screen size of the iOS device
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            
+            // Set the initial view controller to be the root view controller of the window object
+            self.window.rootViewController  = initialViewController;
+            
+            // Set the window object to be the key window and show it
+            [self.window makeKeyAndVisible];
+        }
+        
+    } else if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        
+    {   // The iOS device = iPad
+        
+        //UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+        //UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        //splitViewController.delegate = (id)navigationController.topViewController;
+        
+        // Instantiate a new storyboard object using the storyboard file named Storyboard_iPhone4
+        UIStoryboard *iPhone4Storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
+        
+        // Instantiate the initial view controller object from the storyboard
+        UIViewController *initialViewController = [iPhone4Storyboard instantiateInitialViewController];
+        
+        // Instantiate a UIWindow object and initialize it with the screen size of the iOS device
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        
+        // Set the initial view controller to be the root view controller of the window object
+        self.window.rootViewController  = initialViewController;
+        
+        // Set the window object to be the key window and show it
+        [self.window makeKeyAndVisible];
+        
+        
+    }
+}
+
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    Chartboost *cb = [Chartboost sharedChartboost];
+
+    // Print IFA (Identifier for Advertising) in Output section. Add to applicationDidBecomeActive. iOS 6+ devices only.
+    NSString* ifa = [[[NSClassFromString(@"ASIdentifierManager") sharedManager] advertisingIdentifier] UUIDString];
     
-    cb.appId = @"4f21c409cd1cb2fb7000001b";
-    cb.appSignature = @"92e2de2fd7070327bdeb54c15a5295309c6fcd2d";
+    if (ifa) {
     
-    // Required for use of delegate methods.
-    cb.delegate = self;
+        ifa = [[ifa stringByReplacingOccurrencesOfString:@"-" withString:@""] lowercaseString];
+        NSLog(@"IFA: %@",ifa);
+        
+    }
+    else {
+        
+         NSLog(@"IFA: No IFA returned from device");
+    }
     
-    // Begin a user session. Must not be dependent on user actions or any prior network requests.
-    // Must be called every time your app becomes active.
-    [cb startSession];
+    // Show an interstitial whenever the app starts up
+    [Chartboost showInterstitial:CBLocationHomeScreen];
+  
 }
 
 /*
@@ -95,6 +195,9 @@
         case CBLoadErrorSessionNotStarted : {
             NSLog(@"Failed to load Interstitial, session not started !");
         } break;
+        case CBLoadErrorNoLocationFound : {
+            NSLog(@"Failed to load Interstitial, missing location parameter !");
+        } break;
         default: {
             NSLog(@"Failed to load Interstitial, unknown error !");
         }
@@ -155,7 +258,7 @@
             NSLog(@"Failed to load More Apps, Apps not found !");
         } break;
         case CBLoadErrorSessionNotStarted : {
-            NSLog(@"Failed to load Interstitial, session not started !");
+            NSLog(@"Failed to load More Apps, session not started !");
         } break;
         default: {
             NSLog(@"Failed to load More Apps, unknown error !");
@@ -172,12 +275,10 @@
  * - Interstitial click
  * - Interstitial close
  *
- * #Pro Tip: Use the delegate method below to immediately re-cache interstitials
  */
 
 - (void)didDismissInterstitial:(NSString *)location {
     NSLog(@"dismissed interstitial at location %@", location);
-    [[Chartboost sharedChartboost] cacheInterstitial:location];
 }
 
 /*
@@ -189,24 +290,65 @@
  * - More Apps click
  * - More Apps close
  *
- * #Pro Tip: Use the delegate method below to immediately re-cache the more apps page
  */
 
-- (void)didDismissMoreApps {
-    NSLog(@"dismissed more apps page, re-caching now");
-    [[Chartboost sharedChartboost] cacheMoreApps];
+- (void)didDismissMoreApps:(NSString *)location {
+    NSLog(@"dismissed more apps page at location %@", location);
 }
 
 /*
- * shouldRequestInterstitialsInFirstSession
+ * didCompleteRewardedVideo
  *
- * This sets logic to prevent interstitials from being displayed until the second startSession call
+ * This is called when a rewarded video has been viewed
  *
- * The default is YES, meaning that it will always request & display interstitials.
- * If your app displays interstitials before the first time the user plays the game, implement this method to return NO.
+ * Is fired on:
+ * - Rewarded video completed view
+ *
+ */
+- (void)didCompleteRewardedVideo:(CBLocation)location withReward:(int)reward {
+    NSLog(@"completed rewarded video view at location %@ with reward amount %d", location, reward);
+}
+
+/*
+ * didFailToLoadRewardedVideo
+ *
+ * This is called when a Rewarded Video has failed to load. The error enum specifies
+ * the reason of the failure
  */
 
-- (BOOL)shouldRequestInterstitialsInFirstSession {
-    return YES;
+- (void)didFailToLoadRewardedVideo:(NSString *)location withError:(CBLoadError)error {
+    switch(error){
+        case CBLoadErrorInternetUnavailable: {
+            NSLog(@"Failed to load Rewarded Video, no Internet connection !");
+        } break;
+        case CBLoadErrorInternal: {
+            NSLog(@"Failed to load Rewarded Video, internal error !");
+        } break;
+        case CBLoadErrorNetworkFailure: {
+            NSLog(@"Failed to load Rewarded Video, network error !");
+        } break;
+        case CBLoadErrorWrongOrientation: {
+            NSLog(@"Failed to load Rewarded Video, wrong orientation !");
+        } break;
+        case CBLoadErrorTooManyConnections: {
+            NSLog(@"Failed to load Rewarded Video, too many connections !");
+        } break;
+        case CBLoadErrorFirstSessionInterstitialsDisabled: {
+            NSLog(@"Failed to load Rewarded Video, first session !");
+        } break;
+        case CBLoadErrorNoAdFound : {
+            NSLog(@"Failed to load Rewarded Video, no ad found !");
+        } break;
+        case CBLoadErrorSessionNotStarted : {
+            NSLog(@"Failed to load Rewarded Video, session not started !");
+        } break;
+        case CBLoadErrorNoLocationFound : {
+            NSLog(@"Failed to load Rewarded Video, missing location parameter !");
+        } break;
+        default: {
+            NSLog(@"Failed to load Rewarded Video, unknown error !");
+        }
+    }
 }
+
 @end

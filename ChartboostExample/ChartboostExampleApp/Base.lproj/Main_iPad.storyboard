@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,69 +14,100 @@
                         <viewControllerLayoutGuide type="bottom" id="RLY-AU-LlD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHw-VE-hCT">
-                                <rect key="frame" x="455" y="351" width="211" height="48"/>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHw-VE-hCT">
+                                <rect key="frame" x="187" y="266" width="250" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Show Interstitial"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Interstitial" backgroundImage="Demo-Button.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="showInterstitial" destination="BYZ-38-t0r" eventType="touchUpInside" id="M0n-d2-EcP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5FW-nZ-Cdr">
-                                <rect key="frame" x="106" y="351" width="221" height="48"/>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQG-Cg-JXm">
+                                <rect key="frame" x="187" y="377" width="250" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Cache Interstitial"/>
-                                <connections>
-                                    <action selector="cacheInterstitial" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Zc-b4-yAg"/>
-                                    <action selector="showInterstitial" destination="BYZ-38-t0r" eventType="touchUpInside" id="xlg-4K-fQu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQG-Cg-JXm">
-                                <rect key="frame" x="446" y="610" width="229" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Show More Apps">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="MoreApps" backgroundImage="Demo-Button.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showMoreApps" destination="BYZ-38-t0r" eventType="touchUpInside" id="gp7-dW-mXC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZR-YM-AcD">
-                                <rect key="frame" x="102" y="610" width="239" height="48"/>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpa-Y4-C4b">
+                                <rect key="frame" x="187" y="495" width="250" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Cache More Apps">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Rewarded Video" backgroundImage="Demo-Button.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cacheMoreApps" destination="BYZ-38-t0r" eventType="touchUpInside" id="q8T-QD-Err"/>
-                                    <action selector="showMoreApps" destination="BYZ-38-t0r" eventType="touchUpInside" id="JYK-5B-ku3"/>
+                                    <action selector="showRewardedVideo" destination="BYZ-38-t0r" eventType="touchUpInside" id="KvK-fU-kCd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xH9-HU-mgH" userLabel="Button - Show Newsfeed">
+                                <rect key="frame" x="587" y="266" width="250" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Newsfeed" backgroundImage="Demo-Button.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showNewsfeed" destination="BYZ-38-t0r" eventType="touchUpInside" id="KnF-ld-PBi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COd-IU-T55" userLabel="Button - Show Newsfeed">
+                                <rect key="frame" x="587" y="377" width="250" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Notification" backgroundImage="Demo-Button.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showNotificationUI:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v7g-M0-nLB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N53-4J-OrL" userLabel="Button - Show Newsfeed">
+                                <rect key="frame" x="587" y="492" width="250" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Support" backgroundImage="Demo-Button.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showSupport:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SI5-Jt-Ei4"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Chartboost-LogoH1.png" translatesAutoresizingMaskIntoConstraints="NO" id="PJS-E6-5f4">
+                                <rect key="frame" x="261" y="14" width="503" height="198"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="bZR-YM-AcD" secondAttribute="centerX" constant="162.5" id="5pU-I2-Xth"/>
-                            <constraint firstAttribute="centerY" secondItem="bZR-YM-AcD" secondAttribute="centerY" constant="-122" id="9GG-3K-NBM"/>
-                            <constraint firstAttribute="centerY" secondItem="dHw-VE-hCT" secondAttribute="centerY" constant="137" id="M6q-5y-x9c"/>
-                            <constraint firstAttribute="centerY" secondItem="5FW-nZ-Cdr" secondAttribute="centerY" constant="137" id="Qd9-no-O3c"/>
-                            <constraint firstAttribute="centerX" secondItem="NQG-Cg-JXm" secondAttribute="centerX" constant="-176.5" id="QnB-fI-Z8J"/>
-                            <constraint firstAttribute="centerY" secondItem="NQG-Cg-JXm" secondAttribute="centerY" constant="-121.5" id="Uza-wj-1rI"/>
-                            <constraint firstAttribute="centerX" secondItem="5FW-nZ-Cdr" secondAttribute="centerX" constant="167.5" id="Z6M-ci-LLK"/>
-                            <constraint firstAttribute="centerX" secondItem="dHw-VE-hCT" secondAttribute="centerX" constant="-176.5" id="hqR-tY-fMK"/>
-                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="Chartboost-LogoH1.png" width="960" height="150"/>
+        <image name="Demo-Button.png" width="229" height="73"/>
+    </resources>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
         <simulatedOrientationMetrics key="orientation"/>

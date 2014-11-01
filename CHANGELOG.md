@@ -1,7 +1,69 @@
 ###Changelog
 
-##### Upcoming
+##### v5.0.3
 
+- Bugfixes and stability improvements.
+
+##### v5.0.2
+
+- Added functionality to close loading view if taking too long.
+- Bugfixes and stability improvements.
+
+##### v5.0.1
+
+- Bugfixes and stability improvements.
+
+##### v5.0
+
+- Public video release.
+- Update Chartboost SDK interface to use static methods.
+- Remove deprecated Chartboost Store.
+- New ChartboostExample project.
+- Many delegate methods moved to setter and getter functions.
+- Introduce new Chartboost display methods that accept a UIViewController.
+- Full SKProductsViewController support added.
+- CBPostInstallAnalyticsTracker renamed to CBAnalytics.
+- Reduce overall size of SDK.
+- Dynamically load symbols and frameworks.
+- Remove external dependencies.
+- Enable logging in DEBUG builds via environment variable.
+- Bugfixes and stability improvements.
+
+##### v4.5.1
+
+- Fixes for Store.
+- Fixes for session tracking and for invalid data types.
+
+##### v4.5
+
+- Newsfeed publicly available.
+- Post Install Analytics publicly available.
+
+##### v4.4.1
+
+- Chartboost now supports x86_64 architectures (64 bit simulator)
+
+##### v4.4
+
+- New MoreApps: Location support, new look and feel, custom headers
+- Updates to video beta, optimizations, portrait support
+- New Chartboost initialization method: startWithAppId:appSignature:delegate:
+- Automatic caching enabled after show calls.
+- Deprecated default location API calls.
+- Beta Products support: inPlay and News Feed.
+- New delegate method (didFailToRecordClick:withError:). Called when a click is registered, but the user is not fowrwarded to the App Store
+- Orientation improvements: an ad will now be displayed at any orientation it
+  claims supporting, when the current orientation is not.
+
+##### v4.2
+
+- New library (CBPostInstallAnalyticsTracker) made available to track IAP.
+- Apple non-default frameworks (Quartzcore, System Configuration, Store Kit and
+  Ad Support) don't have to be linked manually anymore.
+- Carrier information added to default request parameters
+- Changed Locations for caching interstitials and more apps to an defined list.
+  Locations are now a list of enum values that can be found in the Chartboost.h file.
+- App Sheet support for More Apps.
 
 ##### v4.1
 
@@ -14,6 +76,7 @@
 - Interstitial background is now blurred if the device & OS support it.
 - Fixed break statement missing in the example project.
 - Fixed issue with the vendor id.
+- Fixed massive memory leak, thorough refactor.
 
 ##### v4.0
 
